@@ -5,5 +5,9 @@ using namespace std;
 
 int main(){
 
+    // create a queue
+    queue<int>q;
+
+
 return 0;
 }
