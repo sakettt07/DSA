@@ -1,6 +1,7 @@
 // some basic most used questons on trees:
 // Height of the B.T
 // Diameter of B.T
+// Check if tree is balanced or not
 #include<bits/stdc++.h>
 using namespace std;
 class solution{
