@@ -1,4 +1,4 @@
-// Contructing the tree if the traversals are given:-->
+// Contructing the tree if the preorder, inorder traversals are given:-->
 #include<bits/stdc++.h>
 using namespace std;
 
