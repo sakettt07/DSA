@@ -2,6 +2,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Sari declarations has been done here
 class Node{
     public:
     int data;
@@ -14,6 +15,8 @@ class Node{
         this->right=NULL;
     }
 };
+
+// Printing wala sara mamlaaaaa
 void levelOrder(Node *root)
 {
     queue<Node *> qe;
@@ -46,6 +49,38 @@ void levelOrder(Node *root)
         }
     }
 }
+void inorder(Node *root)
+{
+    // base
+    if (root == NULL)
+    {
+        return;
+    }
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+void preorder(Node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+void postorder(Node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+// The main function which is maintaining all the logic of the BST:-->
 Node* insertBST(Node* root,int d){
     if(root==NULL){
         root=new Node(d);
@@ -70,8 +105,14 @@ int main(){
     Node* root=NULL;
     cout<<"Enter data to create BST"<<endl;
     takeInput(root);
-    cout<<"Printing the BST"<<endl;
+    cout<<"Printing the BST using level order traversals"<<endl;
     levelOrder(root);
+    cout<<"Printing all the traversals"<<endl;
+    inorder(root);
+    cout<<endl;
+    preorder(root);
+    cout<<endl;
+    postorder(root);
 
 return 0;
 }
