@@ -1,7 +1,6 @@
 // Searching the given node in the binary search tree
 // we can do it by two methiods recursively and iteratively
 
-// perforking deletion int his file only --
 #include<bits/stdc++.h>
 using namespace std;
 // using recursion
