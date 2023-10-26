@@ -32,6 +32,33 @@ class heap{
             cout<<arr[i]<<" ";
         }cout<<endl;
     }
+    void deleteheapval(){
+        if(size==0){
+            cout<<"Nothing to delete"<<endl;
+            return ;
+        }
+        // last element ko root p dal diya
+        arr[1]=arr[size];
+        size--;
+
+        // correct position
+        int i=1;
+        while(i<size){
+            int leftind=2*i;
+            int rightind=2*i+1;
+            if(leftind<size && arr[i]<arr[leftind]){
+                swap(arr[i],arr[leftind]);
+                i=leftind;
+            }
+            else if(rightind<size && arr[i]<arr[rightind]){
+                swap(arr[i],arr[rightind]);
+                i=rightind;
+            }
+            else{
+                return ;
+            }
+        }
+    }
 };
 int main(){
 
@@ -41,6 +68,8 @@ int main(){
     h.insert(53);
     h.insert(52);
     h.insert(54);
+    h.print();
+    h.deleteheapval();
     h.print();
 
 
