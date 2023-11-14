@@ -18,6 +18,7 @@ class heap{
         arr[index]=val;
         while(index>1){
             int parent=index/2;
+            // jo value insert kari hai usko uski sahi jagah p le jana h swapping karkeor parents s compare karke yuki parent toh bada hoga na max heap me.
             if(arr[parent]<arr[index]){
                 swap(arr[parent],arr[index]);
                 index=parent;
