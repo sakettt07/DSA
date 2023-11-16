@@ -2,10 +2,11 @@
 
 // Two of the most popular questions on heaps are 
 // Find the kth largest and the smallest element in the array
+// Find the kth smallest element in the sorted matrix;
 #include<bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class Solution{
 public:
     int findKthLargest(vector<int>& nums, int k) {
         // For the largest element we have used min heap
@@ -45,6 +46,19 @@ public:
         return ans;
         
     }
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<int>pq;
+        int n=matrix.size();
+        int m=matrix[0].size();
+        for(int i=0;i<n;++i){
+            for(int j=0;j<m;++j){
+                pq.push(matrix[i][j]);
+                if(pq.size()>k){
+                    pq.pop();
+                }
+            }
+        }
+        return pq.top();
 };
 int main(){
 
