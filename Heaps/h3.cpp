@@ -1,5 +1,9 @@
 // So in this file a question is solved which is named as;
 // Is Binary tree heap 
+// Merge two binary max heaps-
+    //   Simple approach is to merge the arrays and make a array c from a and b then make the max heap of the array c and apply the heapify function on it. 
+
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -48,6 +52,26 @@ class Solution {
             return true;
         return false;
     }
+
+    // Q2 (solution)
+    vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
+        // your code here
+        
+        vector<int>ans;
+        for(auto i:a){
+            ans.push_back(i);
+        }
+        for(auto i:b){
+            ans.push_back(i);
+        }
+        int size=ans.size();
+        
+        for(int i=size/2-1;i>=0;i--){
+        heapify(ans,size,i);
+    }
+    return ans;
+
+
 };
 int main(){
 
