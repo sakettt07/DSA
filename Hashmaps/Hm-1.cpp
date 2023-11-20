@@ -7,7 +7,7 @@ using namespace std;
 int main(){
 
     // creation
-    unordered_map<string,int>m;
+    map<string,int>m;
 
     // Insertion in the map;
     pair<string,int>p=make_pair("babbar",3);
@@ -36,6 +36,29 @@ int main(){
     cout<<endl;
 
     // To check the presence of any particular key
+    cout<<m.count("love")<<endl;
+
+    m.erase("love");
+    cout<<m.size();
+cout<<endl;
+
+// to iterate over the whole map 
+
+// 1) using the for loop method
+
+for(auto i:m){
+    cout<<i.first<<" "<<i.second<<endl;
+}
+// as it is an unordered map so the output is coming in a unordered manner
+
+// 2) iterator method
+map<string,int>::iterator it=m.begin();
+while(it !=m.end()){
+    cout<<it->first<<" "<<it->second<<endl;
+    it++;
+}
+
+// as we have written only the map so the output is coming in a ordered manner
 
 
 return 0;
