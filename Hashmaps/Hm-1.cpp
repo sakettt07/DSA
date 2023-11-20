@@ -23,7 +23,19 @@ int main(){
     // the above line will not be added because a map always take the unique value so it will update the count of the key.
 
     // Searching
-    cout<<"Everything is running fine"<<endl;
+    cout<<m["mera"]<<endl;
+    cout<<m.at("babbar")<<endl;
+    // cout<<m.at("unknownKey")<<endl;
+    // The above line will be returning a statement which means that the instance has not be created with this name.But.......
+    cout<<m["unknownkey"]<<endl;
+    // the above line will give the answer as 0 because it means that the value of the entered string is 0.wwe can say a entry has been created for the statement.
+
+    // size -To check the size of the map
+    cout<<"The size of the map is:";
+    cout<<m.size();
+    cout<<endl;
+
+    // To check the presence of any particular key
 
 
 return 0;
