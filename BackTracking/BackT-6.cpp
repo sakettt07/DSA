@@ -30,6 +30,30 @@ void solve(int st,vector<int>& candidates,vector<int> & temp,int target){
         
     }
 };
+// In this code you will be getting time limit exceeded so you have to memoize.
+class Solution {
+public:
+int t[201][1001];
+int solve(int st,vector<int>& nums,int target,int n){
+    // base case
+    if(target==0){
+        return 1;
+    }
+    if(st>=n|| target<0)return 0;
+    if(t[st][target]!=-1) return t[st][target];
+    // pahle take karlo
+    int take=solve(0,nums,target-nums[st],n);
+    // when we reject the 
+    int reject=solve(st+1,nums,target,n);
+
+    return t[st][target]= take+reject;
+}
+    int combinationSum4(vector<int>& nums, int target) {
+        int n=nums.size();
+        memset(t,-1,sizeof(t));
+        return solve(0,nums,target,n);
+    }
+};
 
 int main(){
 
