@@ -30,6 +30,56 @@ void solve(int st,vector<int>& candidates,vector<int> & temp,int target){
         
     }
 };
+class Solution {
+public:
+vector<vector<int>>ans;
+void solve(vector<int>& candidates,int st, int target,vector<int>& temp){
+    if(target==0){
+        ans.push_back(temp);
+        return;
+    }
+    for(int i=st;i<candidates.size();i++){
+        if(candidates[i]>target){
+            break;
+        }
+        if(i>st && candidates[i]==candidates[i-1])continue;
+        temp.push_back(candidates[i]);
+        solve(candidates,i+1,target-candidates[i],temp);
+        temp.pop_back();
+    }
+}
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<int>temp;
+        sort(candidates.begin(),candidates.end());
+        solve(candidates,0,target,temp);
+        return ans;
+        
+    }
+};
+class Solution {
+public:
+vector<vector<int>>ans;
+void solve(int st,vector<int>& temp,int k,int n){
+    if(temp.size()==k&&n==0){
+        ans.push_back(temp);
+        return;
+    }
+    if(temp.size()==k&& n!=0){
+        return;
+    }
+    for(int i=st;i<=9;i++){
+        temp.push_back(i);
+        solve(i+1,temp,k,n-i);
+        temp.pop_back();
+    }
+
+}
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int>temp;
+        solve(1,temp,k,n);
+        return ans;
+    }
+};
 // In this code you will be getting time limit exceeded so you have to memoize.
 class Solution {
 public:
