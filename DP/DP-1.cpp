@@ -17,13 +17,25 @@ int fib(int n,vector<int> &dp){
         dp[n]= fib(n-1,dp)+fib(n-2,dp);
         return dp[n];
 }
+// writing the bottomm up approach for the same.
 int main()
 {
         int n;
+        cout<<"Enter any number : ";
         cin>>n;
-        vector<int>dp(n+1);
-        for(int i=0;i<=n;i++) dp[i]=-1;
+        // vector<int>dp(n+1);
+        // for(int i=0;i<=n;i++) dp[i]=-1;
 
-        cout<< fib(n,dp)<<endl;
+        // cout<< fib(n,dp)<<endl;
+
+        // bottom-up
+
+        vector<int>dp(n+1);
+        dp[0]=0;
+        dp[1]=1;
+        for(int i=2;i<=n;i++)
+            dp[i]=dp[i-1]+dp[i-2];
+            cout<<dp[n];
+        
         return 0;
 }
