@@ -27,6 +27,31 @@ int solve(int i,int amt,vector<int>& coins){
         return solve(0,amount,coins);
     }
 };
+
+// coin change -1
+class Solution {
+public:
+// Trying up with the recursion approach
+// as the recursion approach results in the TLE so memoizing it.
+int dp[10010];
+int solve(int amt,vector<int>& coins){
+    if(amt==0)return 0;
+    if(dp[amt]!=-1)return dp[amt];
+    
+    int ans=INT_MAX;
+    for(int coin:coins){
+        if(amt-coin>=0)
+        ans=min(ans+0LL,solve(amt-coin,coins)+1LL);
+        // in the above statement LL is added to avoid the overflow.
+    }
+    return dp[amt]=ans;
+}
+    int coinChange(vector<int>& coins, int amount) {
+        memset(dp,-1,sizeof(dp));
+        int anss=solve(amount,coins);
+        return anss==INT_MAX ? -1 :anss;
+    }
+};
 int main(){
 
 return 0;
