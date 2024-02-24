@@ -25,6 +25,42 @@ public:
         return head; 
     }
 };
+class Solution {
+public:
+int lengthh(ListNode *head){
+    ListNode *temp=head;
+    int len=0;
+    while(temp!=NULL){
+        len++;
+        temp=temp->next;
+    }
+    return len;
+}
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        int l=lengthh(head);
+        int pos=l-n;
+        int cnt=0;
+        if(pos==0){
+            head=head->next;
+            return head;
+        }
+        ListNode *prev=head;
+        ListNode *curr=head;
+        while(curr!=NULL){
+            if(cnt==pos){
+                prev->next=curr->next;
+                curr->next=NULL;
+                break;
+            }
+            else{
+                prev=curr;
+                curr=curr->next;
+                cnt++;
+            }
+        }
+        return head;
+    }
+};
 int main(){
 
 return 0;
