@@ -1,5 +1,6 @@
 
 // Question-2 Permutation in strings
+// Question-3 Minimum Size Subarray Sum
 #include<bits/stdc++.h>
 using namespace std;
 class Solution{
@@ -34,6 +35,24 @@ bool allZero(vector<int>& count) {
 	    return false;
 	}
 
+};
+// Solution to the Question-3
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int sum=0,i=0,j=0;
+        int n=nums.size(),minLen=INT_MAX;
+        while(j<n){
+            sum+=nums[j];
+            while(sum>=target){
+                minLen=min(minLen,j-i+1);
+                sum-=nums[i];
+                i++;
+            }
+            j++;
+        }
+        return minLen==INT_MAX?0:minLen;
+    }
 };
 int main(){
     int t;
