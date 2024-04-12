@@ -21,8 +21,8 @@ class graph{
         // direction=1->directed
 
         // create an edge from u to v
-        adj[u].push_back(v);
-        if(direction==0){
+        adj[u].push_back(v);      
+        if(direction==0){         // 0-1 hai toh 1-0 bhi toh possible h.
             adj[v].push_back(u);
         }
     }
@@ -67,6 +67,8 @@ int main(){
         // Creating an undirected graph
         g.addEdge(u,v,0);
     }
+    cout<<endl;
+    cout<<"Printing the graph."<<endl;
     g.printAdj();
     
 
