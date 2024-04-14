@@ -8,9 +8,20 @@ bool isCycleBFS(int src,unordered_map<int,bool>&visited,unordered_map<int,list<i
     queue<int>qu;
     qu.push(src);
     while(!qu.empty()){
-        
+        int frontnode=qu.front();
+        qu.pop();
+        for(auto i:adj[frontnode]){
+            if(visited[i]=true && i!=parent[frontnode]){
+                return true;
+            }
+            else if(!visited[i]){
+                qu.push(i);
+                visited[i]=1;
+                parent[i]=frontnode;
+            }
+        }
     }
-
+    return false;
 }
 string cycleDetection (vector<vector<int>>& edges, int n, int m)
 {
