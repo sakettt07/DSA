@@ -1,6 +1,7 @@
 // in this we are going to perform the cycle detection for the directed graph using DFS
 // the logic is almost the same but we are having an extra visited mapp because of the backtracking.
 #include <bits/stdc++.h>
+using namespace std;
 bool checkCycle(int node,unordered_map<int,bool>&visited,
 unordered_map<int,bool>&dfsVisited,unordered_map<int,list<int>>& adj ){
   visited[node] = true;
@@ -37,5 +38,14 @@ int detectCycleInDirectedGraph(int n,
         }
       }
     }
+
+
+
+
+    // Using BFS
+
+
+
+    
    return false;
 }
