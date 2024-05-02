@@ -1,4 +1,5 @@
 // Shortest Path algorithm in graphh.
+// doing the same with the for the DAG
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -49,6 +50,10 @@ vector<int> shortestPath( vector<pair<int,int>> edges , int n , int m, int s , i
 	
 }
 
+
+// for the DAG-(Directed Acyclic Graph)
+
+}
 int main(){
 
 return 0;
