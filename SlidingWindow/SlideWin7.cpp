@@ -27,6 +27,39 @@ public:
     }
 };
 
+// Fruit into Basket
+class Solution {
+public:
+// tryin with the classic sliding window approach.
+    int totalFruit(vector<int>& fruits) {
+        int n=fruits.size();
+
+        int i=0,j=0;
+        unordered_map<int,int> mp;
+        int cntF=0,maxi=INT_MIN;
+        while(j<n){
+            if(mp.size()<=2){
+            mp[fruits[j]]++;
+            cntF++;
+              j++;
+            }
+            if(mp.size()>2){
+                 cntF--;
+                maxi=max(maxi,cntF);
+               
+                mp[fruits[i]]--;
+                if(mp[fruits[i]]==0)
+                mp.erase(fruits[i]);
+                i++;  
+            }
+          
+        }
+         maxi=max(maxi,cntF);
+        return maxi;
+        
+    }
+};
+
 int main(){
 
 return 0;
