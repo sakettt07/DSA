@@ -36,7 +36,7 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)
         ans.push_back(front);
 
         for(auto it:adj[front]){
-            indegree[it];
+            indegree[it]--;
             if(indegree[it]==0){
                 qt.push(it);
             }

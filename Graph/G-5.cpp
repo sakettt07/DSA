@@ -50,7 +50,10 @@ int detectCycleInDirectedGraph(int n,
     }
   }
 
-  // Using BFS
+
+
+
+  // Using BFS (Only a extra condition is added where if the count is equals to N (number of nodes) then there must be no cycle present so it is solved.)
   int detectCycleInDirectedGraph(int n,
                                  vector<pair<int, int>> &edges)
   {
