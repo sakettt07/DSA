@@ -1,5 +1,4 @@
 // Will be studying inherirance which is one of the important pillar of the object oriented programming in c++.
-
 // protected -- Sirf inheritance k liye pass karana h inhe
 #include <bits/stdc++.h>
 using namespace std;
