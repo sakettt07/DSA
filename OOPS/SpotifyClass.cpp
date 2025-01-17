@@ -150,7 +150,8 @@ public:
     void displayPlaylists() const {
     for (const auto& pair : playlists) {
         cout << "Playlist Name: " << pair.first << endl;
-        pair.second.display();
+        pair.second.display(); 
+        
     }
 }
 };
