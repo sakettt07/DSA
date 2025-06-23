@@ -26,8 +26,6 @@ public:
         cout << "Song: " << name << ", Artist: " << artist << endl;
     }
 };
-
-// Playlist Class
 class Playlist
 {
     string name;
@@ -155,36 +153,23 @@ public:
     }
 }
 };
-
-// Main Function
 int main()
 {
     Spotify spotify;
 
     try
     {
-        // Add songs to the library
+
         spotify.addSong("Shape of You", "Ed Sheeran");
         spotify.addSong("Blinding Lights", "The Weeknd");
         spotify.addSong("Levitating", "Dua Lipa");
-
-        // Add users
         spotify.addUser("Alice");
         spotify.addUser("Bob");
-
-        // Create a playlist
         spotify.createPlaylist("My Favorites", {"Shape of You", "Blinding Lights"});
-
-        // Add a song to an existing playlist
         spotify.addSongToPlaylist("My Favorites", "Levitating");
-
-        // Play a song
         spotify.playSong("Shape of You");
-
-        // Display library
         spotify.displayLibrary();
 
-        // Display playlists
         spotify.displayPlaylists();
     }
     catch (const exception &e)
