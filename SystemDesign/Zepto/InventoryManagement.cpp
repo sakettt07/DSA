@@ -334,6 +334,174 @@ private:
         stores->push_back(ds);
     }
     vector<DarkStore*> getNearByDarkStores(double ux,double uy,double maxDistance){
+        vector<pair<double,DarkStore*>> distances;
+        for(auto ds:*stores){
+            double dist=ds->distanceTo(ux,uy);
+            if(dist<=maxDistance){
+                distances.push_back(make_pair(dist,ds));
+            }
+        }
+        // from the above iteration all the stores nearby will appear for the selection
+        sort(distances.begin(),distances.end(),[](auto& a,auto& b){
+            return a.first<b.first;
+        });
+        vector<DarkStore*> result;
+        for(auto& p:distances){
+            result.push_back(p.second);
+        }
+        return result;
+    }
+    ~DarkStoreManager(){
+        for(auto ds:*stores){
+            delete ds;
+        }
+        delete stores;
+    }
+
+};
+
+DarkStoreManager* DarkStoreManager::instance=NULL;
+
+// Our Cart and User classes
+
+class Cart{
+    public:
+    vector<pair<Product*,int>> items;
+    void addItem(int sku,int qty){
+        Product* prod=ProductFactory::createProduct(sku);
+        items.push_back(make_pair(prod,qty));
+        cout<<"Added the product with sku "<<sku<<" with quantity "<<qty<<endl;
+    }
+
+    double getCartTotal(){
+        double sum=0;
+        for(auto item:items){
+            sum+=(item.first->getPrice()*item.second);
+        }
+        return sum;
+    }
+    vector<pair<Product*,int>> getItems(){
+        return items;
+    }
+    ~Cart(){
+        for(auto &item:items){
+            delete item.first;
+        }
+    }
+};
+
+class User{
+    public:
+    string name;
+    double  x,y;
+    Cart* cart;
+    User(string n,double xCoods,double yCoods){
+        name=n;
+        x=xCoods;
+        y=yCoods;
+        cart=new Cart();
+    }
+    ~User(){
+        delete cart;
+    }
+    Cart* getCart(){
+        return cart;
+    }
+};
+
+class DeliveryPartner{
+    public:
+    string name;
+    DeliveryPartner(string n){
+        name=n;
+    }
+};
+
+class Order{
+    public:
+    static int nextId;
+    int id;
+    User* user;
+    vector<pair<Product*,int>> items;
+    vector<DeliveryPartner*> deliveryPartners;
+    double  totalAmount;
+    Order(User*u){
+        id=nextId++;
+        user=u;
+        totalAmount=0.0;
+    }
+};
+int Order::nextId=1;
+
+class OrderManager{
+    private:
+    vector<Order*>* orders;
+    static OrderManager* instance;
+    OrderManager(){
+        orders=new vector<Order*>();
+    }
+    public:
+    static OrderManager* getInstance(){
+        if(instance==NULL){
+            instance=new OrderManager();
+        }
+        return instance;
+    }
+
+    void placeOrder(User* user,Cart* cart){
+        cout<<"\n Placing order for: "<<user->name<<endl;
+        vector<pair<Product*,int>>requestedItems=cart->getItems();
         
+        // 1. Find out all the nearest dark stores.
+        double maxDist=5.0;
+        vector<DarkStore*> nearByDarkStores=DarkStoreManager::getInstance()->getNearByDarkStores(user->x,user->y,maxDist);
+
+        if(nearByDarkStores.empty()){
+            cout<<"No dark stores nearby"<<endl;
+            return;
+        }
+
+        // 2. Find the best dark Store who owns most of the items.
+        DarkStore* firstStore=nearByDarkStores.front();
+
+        bool allInFirst=true;
+        for(pair<Product*,int>& item:requestedItems){
+            int sku=item.first->getSku();
+            int qty=item.second;
+            if(firstStore->checkStock(sku)<qty){
+                allInFirst=false;
+                break;
+            }
+        }
+        Order* order=new Order(user);
+
+        if(allInFirst){
+            cout<<"All items are available in the first store"<<firstStore->getName()<<endl;
+            for(pair<Product*,int>& item:requestedItems){
+                int sku=item.first->getSku();
+                int qty=item.second;
+                firstStore->removeStock(sku,qty);
+                order->items.push_back(item);
+            }
+            order->totalAmount=cart->getCartTotal();
+            order->deliveryPartners.push_back(new DeliveryPartner("DP1"));
+            cout<<"ASsigned delivery partner: Partner1\n";
+        }
+        // we need multiple delivery partners as we need to take items from different store.
+
+        else{
+            cout<<"Splitting order across stores... \n";
+            map<int,int>allItems;
+        }
+        
+    }
+    vector<Order*> getAllOrders(){
+        return *orders;
+    }
+    ~OrderManager(){
+        for(auto order:*orders){
+            delete order;
+        }
+        delete orders;
     }
 };
