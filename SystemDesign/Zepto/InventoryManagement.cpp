@@ -491,7 +491,23 @@ class OrderManager{
 
         else{
             cout<<"Splitting order across stores... \n";
-            map<int,int>allItems;
+            map<int,int>allItems;    //sku-Qty
+            for(pair<Product*,int>& item:requestedItems){
+                allItems[item.first->getSku()]+=item.second;
+            }
+            int partnerId=1;
+            for(DarkStore* store:nearByDarkStores){
+                if(allItems.empty()){
+                    break;
+                }
+                cout<<"\nChecking store: "<<store->getName()<<endl;
+                bool assigned=false;
+                vector<int>toErase;
+
+                for(auto&[sku,qty]:allItems){
+                    
+                }
+            }
         }
         
     }
