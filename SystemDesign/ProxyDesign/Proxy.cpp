@@ -37,6 +37,10 @@ class ImageProxy: public IImage{
         }
         realImage->display();
     }
+    void displaylist
+    (int indent=0) override{
+        cout << string(indent, ' ') << "Opening image: " << filename << endl;
+    }
 };
 
 int main(){
