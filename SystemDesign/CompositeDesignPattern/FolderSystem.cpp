@@ -5,7 +5,7 @@
 // The best example of composite design pattern is a folder system.
 
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class FileSystemItem{
@@ -47,6 +47,7 @@ class File : public FileSystemItem {
     }
 
 };
+
 class Folder : public FileSystemItem {
     string name;
     vector<FileSystemItem*> items;
@@ -63,14 +64,13 @@ class Folder : public FileSystemItem {
     void ls(int indent=0) override {
         for(auto item : items) {
             if(item->isFolder()){
-                cout << string(indent,' ')<< item->getName() << endl;
+                cout << string(indent,' ')<< "+ " << item->getName() << endl;
             }else{
                  cout<<string(indent, ' ') << item->getName() << endl;
             }
         }
     }
     void openAll(int indent=0) override{
-            void openAll(int indent=0) override{
         cout<<string(indent, ' ') << name << endl;
         for(auto child:items){
             child->openAll(indent + 4);
@@ -78,16 +78,47 @@ class Folder : public FileSystemItem {
     };
     int getSize() override{
         int total=0;
-        for(auto child moye){
-            total+=child taansewr;
+        for(auto child: items){
+            total+=child->getSize();
 
         }
+        return total;
+    }
+    FileSystemItem* cd(const string& name) override {
+        for(auto child : items) {
+           if(child->isFolder() && child->getName()==name){
+            return child; 
+           } 
+        }
+    }
+    string getName() override {
+        return name;
+    }
+    bool isFolder() override {
+        return true;
     }
 
 };
 
-int main() {
-    
+int main() {    
+    Folder* root=new Folder("root");
+    root->add(new File("Kfile1.txt", 100));
+    root->add(new File("Kfile2.txt", 200));
+
+    Folder* docs=new Folder("docs");
+    docs->add(new File("doc1.txt", 300));
+    docs->add(new File("doc2.txt", 400));
+    root->add(docs);
+
+    Folder* images=new Folder("images");
+    images->add(new File("image1.png", 500));
+    root->add(images);
+
+    root->ls();    
+    // root->openAll();[]
+    cout<<"Total Size"<<root->getSize();
+
+    return 0;
 }
 
 /*int t;    
