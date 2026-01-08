@@ -27,6 +27,7 @@ public:
             }
             sign=sign*(-1);
         }
+        return result;
     }
 };
 int main(){
