@@ -27,7 +27,7 @@ vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)
         int v = edges[i][1];
         adj[u].push_back(v);
     }
-    // creating vector to keep track of visited verte
+    // creating vector to keep track of visited vertices
     vector<bool> visited(v, false);
     // using a data stracture stack
     stack<int> s;
