@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 // in this method we will be using the rank of the parent to decide which one will be the parent of the other one
-
+// optimsed DSU
 class Solution {
     vector<int>parent;
     vector<int>rank;
@@ -11,9 +11,9 @@ class Solution {
         return x;
     }
     return parent[x]=find(parent[x]);
-}
-    int Union(){
-        int x_parent=find(x);
+    }
+    int Union(int x,int y){
+    int x_parent=find(x);
     int y_parent=find(y);
     if(x_parent==y_parent){
         return ;
