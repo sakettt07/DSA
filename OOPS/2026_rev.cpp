@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Checking with the abstraction and the encapsulation concepts of OOPS.
+
 class Car{
     public:
     virtual void startEngine()=0;
@@ -11,18 +13,25 @@ class Car{
     virtual ~Car(){}
 };
 class SportCar:public Car{
-    public:
+    private:
     string brand;
     string model;
     bool isEngineOn;
     int currentSpeed;
     int currentGear;
+    public:
     SportCar(string b,string m){
         this->brand=b;
         this->model=m;
         isEngineOn=false;
         currentSpeed=0;
         currentGear=0;
+    }
+    int getCurrentSpeed(){
+        return currentSpeed;
+    }
+    int getCurrentGear(){
+        return currentGear;
     }
     void startEngine(){
         isEngineOn=true;
@@ -72,6 +81,7 @@ int main(){
     myCar->accelerate();
     myCar->brake();
     myCar->stopEngine();
+    
     delete myCar;
 
 return 0;
