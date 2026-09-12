@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 // protected variables ko sirf inherited class k members hi access kar sakte h 
+// if we had made a method in a class as virtual then it can be overridden in the derived class and the derived class's method will be called instead of the base class's method when called through a base class pointer or reference.
 class Car{
     protected:
     string brand;
@@ -62,7 +63,37 @@ class ManualCar:public Car{
         }
     }
 };
+class ElectricCar:public Car{
+    private:
+    int batteryLevel;
+    public:
+    ElectricCar(string b, string m):Car(b,m){
+        batteryLevel = 100; // Battery level in percentage
+    }
+    void chargeBattery(int amount){
+        if(amount > 0 && batteryLevel < 100){
+            batteryLevel += amount;
+            if(batteryLevel > 100) batteryLevel = 100;
+            cout << "Battery charged to " << batteryLevel << "%." << endl;
+        } else {
+            cout << "Invalid charge amount or battery already full." << endl;
+        }
+    }
+};
 int main(){
-
+    ManualCar* myManualCar = new ManualCar("Toyota", "Corolla");
+    myManualCar->startEngine();
+    myManualCar->shiftGear(1);
+    myManualCar->accelerate(30);
+    myManualCar->brake(10);
+    myManualCar->stopEngine();
+    delete myManualCar;
+    ElectricCar* myElectricCar = new ElectricCar("Tesla", "Model S");
+    myElectricCar->chargeBattery(20);
+    myElectricCar->startEngine();
+    myElectricCar->accelerate(50);  
+    myElectricCar->brake(20);
+    myElectricCar->stopEngine();
+    delete myElectricCar;
 return 0;
 }
