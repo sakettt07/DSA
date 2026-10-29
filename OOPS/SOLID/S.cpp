@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// below is the example of S of SOLID violating the principle of single responsibility principle
 class Product{
     public:
     int price;
