@@ -41,10 +41,16 @@ class ShoppingCart{
             cout<<"Saving the shopping cart to database"<<endl;
         }
 
+        // below is the xample for solid
     
 };
 
 int main(){
+    ShoppingCart* cart=new ShoppingCart();
+    cart->addProduct(new Product(150,"TShirt"));
+    cart->addProduct(new Product(150,"cable"));
 
+    cart->printInvoice();
+    cart->saveToDB();
 return 0;
 }
