@@ -65,12 +65,94 @@ class FixedTermAccount:public Account{
     };
 };
 
-// Solution -1 Where we are tightly coupling the BankClient on the basis of type of account.
 
+class DepositableProcess{
+    public:
+    virtual void deposit(double amt)=0;
+};
+class WithdrawableProcess:public DepositableProcess{
+    public:
+    
+    virtual void withdraw(double amt)=0;
+};
+class SavingsAccount:public WithdrawableProcess{
+    private:
+    double balance;
+    public:
+    SavingsAccount(){
+        balance=0;
+    }
+    void deposit(double amt){
+        balance+=amt;
+        cout<<"Money Deposited"<<endl;
+    }
+    void withdraw(double amt){
+        if(balance>=amt){
+            balance-=amt;
+            cout<<"Money Withdrawn"<<endl;
+        }
+        else{
+            cout<<"Insufficient balance"<<endl;
+        }
+    };
+};
+class CurrentAccount:public WithdrawableProcess{
+    private:
+    double balance;
+    public:
+    CurrentAccount(){
+        balance=0;
+    }
+    void deposit(double amt){
+        balance+=amt;
+        cout<<"Money Deposited"<<endl;
+    }
+    void withdraw(double amt){
+        if(balance>=amt){
+            balance-=amt;
+            cout<<"Money Withdrawn"<<endl;
+        }
+        else{
+            cout<<"Insufficient balance"<<endl;
+        }
+    };
+};
+class FixedTermAccount:public DepositableProcess{
+    private:
+    double balance;
+    public:
+    FixedTermAccount(){
+        balance=0;
+    }
+    void deposit(double amt){
+        balance+=amt;
+        cout<<"Money Deposited"<<endl;
+    }
+};
+// Solution -1 Where we are tightly coupling the BankClient on the basis of type of account.
 class BankClient{
+    private:
+    vector<WithdrawableProcess*>accounts;
+    vector<DepositableProcess*>deposits;
+    public:
+    BankClient(vector<WithdrawableProcess*>accs,vector<DepositableProcess*>deposits){
+        this->accounts=accs;
+        this->deposits=deposits;
+    }
+    void processTransaction(){
+        for(WithdrawableProcess* acc:accounts){
+            acc->deposit(1000);
+            acc->withdraw(500);
+        }
+        for(DepositableProcess* dep:deposits){
+            dep->deposit(1000);
+        }
+    }
+};
+class BankClient1{
     vector<Account*>accounts;
     public:
-    BankClient(vector<Account*>accs){
+    BankClient1(vector<Account*>accs){
         this->accounts=accs;
     }
     void processTransaction(){
@@ -94,9 +176,17 @@ class BankClient{
 int main(){
     vector<Account*> accounts;
     accounts.push_back(new SavingAccount());
-    accounts.push_back(new CurrentAccount());
-    accounts.push_back(new FixedTermAccount());
-    BankClient* client=new BankClient(accounts);
+    // accounts.push_back(new CurrentAccount());
+    // accounts.push_back(new FixedTermAccount());
+    // BankClient* client=new BankClient(accounts);
+    // client->processTransaction();
+    vector<WithdrawableProcess*> withdrawableAccounts;
+    withdrawableAccounts.push_back(new SavingsAccount());
+    withdrawableAccounts.push_back(new CurrentAccount());
+    vector<DepositableProcess*> depositableAccounts;
+    depositableAccounts.push_back(new FixedTermAccount());
+    BankClient* client=new BankClient(withdrawableAccounts,depositableAccounts);
     client->processTransaction();
+    
 return 0;
 }
